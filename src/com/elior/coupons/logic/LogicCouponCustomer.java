@@ -20,40 +20,42 @@ public class LogicCouponCustomer implements ILogicCouponCustomer{
 
 		CouponCustomerDao couponCustomerDao = new CouponCustomerDao();
 
-		if(couponCustomerDao.isCustomerCouponExistByCustomerIdAndCouponId(customerCoupon.getCustomerid(), customerCoupon.getCouponId())){
+		if(couponCustomerDao.isCustomerCouponExistByCustomerId(customerCoupon.getCustomerid())){
 			throw new ApplicationException(TypeError.GENERAL_ERROR,"customerCoupon not created");
 		}
-		if( ! couponCustomerDao.isCustomerCouponExistByCustomerIdAndCouponId(customerCoupon.getCustomerid(), customerCoupon.getCouponId())){
+		if( ! couponCustomerDao.isCustomerCouponExistByCustomerId(customerCoupon.getCustomerid())){
 		couponCustomerDao.createCustomerCoupon(customerCoupon);
 		}
 	}
 	// delete join row from db if customer and coupon exist
-	public void deleteCustomerCoupon(long customerId, long couponId) throws ApplicationException{
+	//public void deleteCustomerCoupon(long customerId, long couponId) throws ApplicationException{
 
-		CouponCustomerDao couponCustomerDao = new CouponCustomerDao();
-		CouponDao couponDao = new CouponDao();
-		CustomerDao customerDao = new CustomerDao();
+		//CouponCustomerDao couponCustomerDao = new CouponCustomerDao();
+		//CouponDao couponDao = new CouponDao();
+		//CustomerDao customerDao = new CustomerDao();
 
-		if( ! couponCustomerDao.isCustomerCouponExistByCustomerIdAndCouponId(customerId, couponId)){
-			throw new ApplicationException(TypeError.GENERAL_ERROR, "not delete");
-		}
+		//if( ! couponCustomerDao.isCustomerCouponExistByCustomerIdAndCouponId(customerId, couponId)){
+		//	throw new ApplicationException(TypeError.GENERAL_ERROR, "not delete");
+	//	}
 
-		couponCustomerDao.deleteCustomerCoupon(couponId, customerId);
-		couponDao.removeCoupon(couponId);
-		customerDao.removeCustomer(customerId);
-	}
+	//	couponCustomerDao.deleteCustomerCoupon(couponId, customerId);
+	//	couponDao.removeCoupon(couponId);
+	//	customerDao.removeCustomer(customerId);
+	//}
 	//print the  datils of customercoupon if the id of bowt exist
-	public void getCustomerCoupon( long couponId , long customerId) throws ApplicationException{
+	public JoinCustomerCoupon getCustomerCoupon( long customerId) throws ApplicationException{
 
 		CouponCustomerDao couponCustomerDao = new CouponCustomerDao();
 
-		if( ! couponCustomerDao.isCustomerCouponExistByCustomerIdAndCouponId(customerId, couponId)){
+		if( ! couponCustomerDao.isCustomerCouponExistByCustomerId(customerId)){
 			throw new ApplicationException(TypeError.GENERAL_ERROR, "coupon not exist");
 		}
 
-		couponCustomerDao.getCustomerCoupon(couponId, customerId);
+		return couponCustomerDao.getCustomerCoupon( customerId);
 
 	}
+
+
 
 
 }

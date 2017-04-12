@@ -31,30 +31,23 @@ public class CouponCustomerApi {
 		
 	}
 	
-	@DELETE
-	@Path("/{customerCoupon}")
-	public void deleteCouponCustomer(@PathParam ("customerCouon") long customerId , long couponId) throws ApplicationException{
+	@GET
+	public JoinCustomerCoupon getCustomerCoupon (long customerId) throws ApplicationException{
 		
-		joinTableCustomer.deleteCustomerCoupon(customerId, couponId);
-		
-	}
-	
-	//@GET
-	//@Path("/{customerCoupon}")
-	//public JoinCustomerCoupon getCustomerCoupon (){
-		
+		return joinTableCustomer.getCustomerCoupon(customerId);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

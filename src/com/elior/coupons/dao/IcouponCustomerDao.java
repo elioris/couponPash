@@ -13,13 +13,13 @@ import com.elior.coupons.exception.ApplicationException;
 
 public interface IcouponCustomerDao {
 	
-	public void deleteCustomerCoupon(long couponId, long customerId) throws ApplicationException;
+	public void deleteCustomerCoupon(long id) throws ApplicationException;
 
 	public void createCustomerCoupon(JoinCustomerCoupon customerCoupon) throws ApplicationException;
 
-	public  JoinCustomerCoupon getCustomerCoupon(long couponId , long customerId) throws ApplicationException;
+	public  JoinCustomerCoupon getCustomerCoupon( long customerId) throws ApplicationException;
 	
-	public boolean isCustomerCouponExistByCustomerIdAndCouponId(long customerId , long couponId) throws ApplicationException;
+	public boolean isCustomerCouponExistByCustomerId(long customerId) throws ApplicationException;
 	
 	public JoinCustomerCoupon extractCouponFromResultSet(ResultSet resultSet) throws SQLException;
 	

@@ -8,9 +8,7 @@ public interface ILogicCouponCustomer {
 
 	public void createCustomerCoupon(JoinCustomerCoupon customerCoupon) throws ApplicationException;
 
-	public void deleteCustomerCoupon(long customerId, long couponId) throws ApplicationException;
-
-	public void getCustomerCoupon( long couponId , long customerId) throws ApplicationException;
+	public JoinCustomerCoupon getCustomerCoupon(  long customerId) throws ApplicationException;
 
 
 

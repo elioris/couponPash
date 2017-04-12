@@ -1,7 +1,8 @@
 package com.elior.coupons.logic;
 
 import com.elior.coupons.beans.Company;
-import com.elior.coupons.beans.Coupon; 
+import com.elior.coupons.beans.Coupon;
+import com.elior.coupons.dao.CouponCustomerDao;
 import com.elior.coupons.dao.CouponDao;
 import com.elior.coupons.enums.CouponType;
 import com.elior.coupons.enums.ErrorType;
@@ -16,6 +17,8 @@ import com.elior.coupons.enums.TypeError;
 //#########################
 
 public class LogicCoupon implements ILogicCoupon {
+	
+	CouponCustomerDao joinTable = new CouponCustomerDao();
 	//create coupon if exsit by tytle
 	@Override
 	public void createCoupon(Coupon coupon) throws ApplicationException{
@@ -38,6 +41,7 @@ public class LogicCoupon implements ILogicCoupon {
 		}
 
 		couponDao.removeCoupon(id);
+		joinTable.deleteCustomerCoupon(id);
 	}
 	//update coupon if exsite by id 
 	@Override

@@ -43,7 +43,7 @@ public class CouponCustomerDao implements IcouponCustomerDao{
 
 	@Override
 	//show the coupon id and coustomer id
-	public JoinCustomerCoupon getCustomerCoupon(long couponId , long customerId) throws ApplicationException {
+	public JoinCustomerCoupon getCustomerCoupon( long customerId) throws ApplicationException {
 		//coonection help as to connect to db
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -53,10 +53,10 @@ public class CouponCustomerDao implements IcouponCustomerDao{
 		{
 			// getting coonection from the linux server
 			connection = JdbcUtils.getConnection();
-			preparedStatement = connection.prepareStatement("select * from join_cust_coupon where coupon_ID = ? and customer_ID = ? ");
+			preparedStatement = connection.prepareStatement("select * from join_cust_coupon where customer_ID = ? ");
 			//getting the values
-			preparedStatement.setLong(1, couponId);
-			preparedStatement.setLong(2, customerId);
+			
+			preparedStatement.setLong(1, customerId);
 			// execute The query
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()){
@@ -77,7 +77,7 @@ public class CouponCustomerDao implements IcouponCustomerDao{
 
 	@Override
 	//delete one coustomer id and coupon id from join table only
-	public void deleteCustomerCoupon(long couponId, long customerId) throws ApplicationException {
+	public void deleteCustomerCoupon(long id) throws ApplicationException {
 		//coonection help as to connect to db
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -86,10 +86,10 @@ public class CouponCustomerDao implements IcouponCustomerDao{
 			// getting coonection from the linux server
 			connection = JdbcUtils.getConnection();
 
-			preparedStatement = connection.prepareStatement("delete from join_cust_coupon where coupon_ID = ? and customer_ID = ?");
+			preparedStatement = connection.prepareStatement("delete from join_cust_coupon where coupon_ID = ? or customer_ID = ?");
 			//getting the values
-			preparedStatement.setLong(1, couponId);
-			preparedStatement.setLong(2, customerId);
+			preparedStatement.setLong(1, id);
+			preparedStatement.setLong(2, id);
 			preparedStatement.executeUpdate();
 
 		}catch(SQLException e){
@@ -113,7 +113,7 @@ public class CouponCustomerDao implements IcouponCustomerDao{
 	}
 
 	@Override
-	public boolean isCustomerCouponExistByCustomerIdAndCouponId(long customerId, long couponId)
+	public boolean isCustomerCouponExistByCustomerId(long customerId)
 			throws ApplicationException {
 
 		Connection connection = null;
@@ -125,10 +125,10 @@ public class CouponCustomerDao implements IcouponCustomerDao{
 			// getting coonection from the linux server
 
 			connection = JdbcUtils.getConnection();
-			preparedStatement = connection.prepareStatement("select * from join_cust_coupon where customer_ID = ? and coupon_ID = ?");
+			preparedStatement = connection.prepareStatement("select * from join_cust_coupon where customer_ID = ?");
 			//getting the values
 			preparedStatement.setLong(1, customerId);
-			preparedStatement.setLong(2, couponId);
+			
 			// execute The query
 			resultSet = preparedStatement.executeQuery();
 
