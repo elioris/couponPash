@@ -9,7 +9,7 @@ public class ValidationUtil{
 	
 	
 	//chking with rgex the validation of the emeil
-		public static boolean isEmailValid(String email) {
+		public boolean isEmailValid(String email) {
 			
 			String EMAIL_PATTERN =
 					"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -23,7 +23,7 @@ public class ValidationUtil{
 		
 		//chking with rgex the validation of the password
 	
-		public static boolean isPasswordValid(String password) {
+		public boolean isPasswordValid(String password) {
 			String PASS_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#!$%^&+=])(?=\\S+$).{8,}";
 			Pattern pattern = Pattern.compile(PASS_PATTERN);
 			Matcher matcher = pattern.matcher(password);

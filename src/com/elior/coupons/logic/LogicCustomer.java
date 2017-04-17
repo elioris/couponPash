@@ -1,10 +1,12 @@
 package com.elior.coupons.logic;
 
 import com.elior.coupons.beans.Customer;
+import com.elior.coupons.dao.CouponCustomerDao;
 import com.elior.coupons.dao.CustomerDao;
 import com.elior.coupons.enums.TypeError;
 import com.elior.coupons.exception.ApplicationException;
 import com.elior.coupons.logic.interfaces.ILogicCustomer;
+import com.elior.coupons.utilss.ValidationUtil;
 
 //=======================
 //
@@ -13,6 +15,9 @@ import com.elior.coupons.logic.interfaces.ILogicCustomer;
 //==========================
 
 public class LogicCustomer implements ILogicCustomer{
+	
+	ValidationUtil validation = new ValidationUtil();
+	CouponCustomerDao joinTable = new CouponCustomerDao();
 	
 	//create new customeer if the id exist
 	@Override
@@ -23,7 +28,9 @@ public class LogicCustomer implements ILogicCustomer{
 		if(customerDao.isCustomerExistById(customer.getId())){
 			throw new ApplicationException(TypeError.GENERAL_ERROR,"customer alredy exist");
 		}
+		else if (validation.isPasswordValid(customer.getPassword())){
 		customerDao.createCustomer(customer);
+		}
 	}
 	//update customer if customer exist by id
 	@Override
@@ -48,6 +55,7 @@ public class LogicCustomer implements ILogicCustomer{
 
 		}
 		customerDao.removeCustomer(id);
+		joinTable.deleteCustomerCoupon(id);
 	}
 	//login if username and password match
 	@Override 

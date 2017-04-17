@@ -9,6 +9,7 @@ import com.elior.coupons.enums.ErrorType;
 import com.elior.coupons.enums.TypeError;
 import com.elior.coupons.exception.ApplicationException;
 import com.elior.coupons.logic.interfaces.ILogicCoupon;
+import com.elior.coupons.utilss.ValidationUtil;
 import com.elior.coupons.enums.TypeError;
 //@@@@@@@@@@@@@@@@@
 //
@@ -17,6 +18,7 @@ import com.elior.coupons.enums.TypeError;
 //#########################
 
 public class LogicCoupon implements ILogicCoupon {
+	
 	
 	CouponCustomerDao joinTable = new CouponCustomerDao();
 	//create coupon if exsit by tytle
@@ -27,8 +29,11 @@ public class LogicCoupon implements ILogicCoupon {
 
 		if(couponDao.isCouponExistByTitle(coupon.getTitle())){
 			throw new ApplicationException(ErrorType.COUPON_NAME_ALREADY_EXISTS, "Coupon already exists");
-		}
+		} 
+		if( ! coupon.equals(null)){
+			
 		couponDao.createCoupon(coupon);
+		}
 	}
 	//remove the coupon if exist by id
 	@Override

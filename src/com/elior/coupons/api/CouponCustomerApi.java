@@ -32,7 +32,8 @@ public class CouponCustomerApi {
 	}
 	
 	@GET
-	public JoinCustomerCoupon getCustomerCoupon (long customerId) throws ApplicationException{
+	@Path("/{customerId}")
+	public JoinCustomerCoupon getCustomerCoupon (@PathParam("customerId") long customerId) throws ApplicationException{
 		
 		return joinTableCustomer.getCustomerCoupon(customerId);
 		

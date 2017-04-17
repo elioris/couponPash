@@ -23,7 +23,7 @@ public class JdbcUtils {
 	public static Connection getConnection() throws SQLException{
 		Connection connection = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/coupons_manager","root", 
-				"12345");
+				"admin");
 		// localhost means "THIS (LOCAL) COMPUTER"
 		// SCHEMA_NAME_YOU_NEED_TO_RENAME is the DB name, also known as Schema name.
 		// in your DB you will need to SCHEMA_NAME_YOU_NEED_TO_RENAME 
